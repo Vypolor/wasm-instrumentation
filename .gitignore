@@ -1,0 +1,3 @@
+# Project exclude paths
+/wasm-instrumentation-client/target/
+/wasm-instrumentation-library/target/
