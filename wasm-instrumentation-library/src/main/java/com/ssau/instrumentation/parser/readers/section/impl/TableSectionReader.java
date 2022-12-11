@@ -1,5 +1,6 @@
 package com.ssau.instrumentation.parser.readers.section.impl;
 
+import com.ssau.instrumentation.model.Limits;
 import com.ssau.instrumentation.model.enums.Type;
 import com.ssau.instrumentation.model.section.impl.Table;
 import com.ssau.instrumentation.parser.Handler;
@@ -15,7 +16,7 @@ public class TableSectionReader extends BaseSectionReader<Table> {
     @Override
     protected Table read() {
         Type type = file.type();
-        var limits = file.readLimits();
+        Limits limits = file.readLimits();
         return new Table(type, limits);
     }
 

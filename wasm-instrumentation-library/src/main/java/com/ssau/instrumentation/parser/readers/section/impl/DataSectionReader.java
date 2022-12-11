@@ -6,6 +6,7 @@ import com.ssau.instrumentation.parser.readers.WasmReader;
 import com.ssau.instrumentation.parser.readers.section.BaseSectionReader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataSectionReader extends BaseSectionReader<DataSegment> {
 
@@ -15,19 +16,19 @@ public class DataSectionReader extends BaseSectionReader<DataSegment> {
 
     @Override
     protected DataSegment read() {
-        var index = file.readUnsignedLeb128();
-        var expression = new ArrayList<Byte>();
+        int index = file.readUnsignedLeb128();
+        List<Byte> expression = new ArrayList<Byte>();
         byte instruction;
         do {
             instruction = file.readU8();
             expression.add(instruction);
         } while (instruction != 0x0B);
-        var expressionBuffer = new byte[expression.size()];
+        byte[] expressionBuffer = new byte[expression.size()];
         for (int j = 0; j < expression.size(); j++) {
             expressionBuffer[j] = expression.get(j);
         }
-        var dataLength = file.readUnsignedLeb128();
-        var dataBuffer = file.readBytes(dataLength);
+        int dataLength = file.readUnsignedLeb128();
+        byte[] dataBuffer = file.readBytes(dataLength);
 
         return new DataSegment(index, expressionBuffer, dataBuffer);
     }

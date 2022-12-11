@@ -6,6 +6,7 @@ import com.ssau.instrumentation.parser.readers.WasmReader;
 import com.ssau.instrumentation.parser.readers.section.BaseSectionReader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ElementSectionReader extends BaseSectionReader<ElementSegment> {
     public ElementSectionReader(WasmReader file, int length) {
@@ -14,19 +15,19 @@ public class ElementSectionReader extends BaseSectionReader<ElementSegment> {
 
     @Override
     protected ElementSegment read() {
-        var tableIndex = file.readI32();
+        int tableIndex = file.readI32();
         byte instruction;
-        var instructionsList = new ArrayList<Byte>();
+        List<Byte> instructionsList = new ArrayList<Byte>();
         do {
             instruction = file.readU8();
             instructionsList.add(instruction);
         } while (instruction != 0x0B);
-        var expressionBuffer = new byte[instructionsList.size()];
+        byte[] expressionBuffer = new byte[instructionsList.size()];
         for (int j = 0; j < expressionBuffer.length; j++) {
             expressionBuffer[j] = instructionsList.get(j);
         }
-        var funcVecSize = file.readI32();
-        var funcIdxs = new int[funcVecSize];
+        int funcVecSize = file.readI32();
+        int[] funcIdxs = new int[funcVecSize];
         for (int k = 0; k < funcVecSize; k++) {
             funcIdxs[k] = file.readI32();
         }

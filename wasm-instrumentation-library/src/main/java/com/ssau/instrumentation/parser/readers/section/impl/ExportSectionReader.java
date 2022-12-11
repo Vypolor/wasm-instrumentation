@@ -15,9 +15,9 @@ public class ExportSectionReader extends BaseSectionReader<ExportSegment> {
     @Override
     protected ExportSegment read() {
         String name = file.readString();
-        var importCode = file.readU8();
-        var kind = ExternalKind.valueOf(importCode);
-        var index = file.readUnsignedLeb128();
+        byte importCode = file.readU8();
+        ExternalKind kind = ExternalKind.valueOf(importCode);
+        int index = file.readUnsignedLeb128();
         return new ExportSegment(name, kind, index);
     }
 

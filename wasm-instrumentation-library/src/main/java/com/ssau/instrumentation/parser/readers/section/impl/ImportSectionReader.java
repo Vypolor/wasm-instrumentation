@@ -1,6 +1,7 @@
 package com.ssau.instrumentation.parser.readers.section.impl;
 
 import com.ssau.instrumentation.model.Import;
+import com.ssau.instrumentation.model.section.ImportSectionEntryType;
 import com.ssau.instrumentation.parser.Handler;
 import com.ssau.instrumentation.parser.readers.WasmReader;
 import com.ssau.instrumentation.parser.readers.section.BaseSectionReader;
@@ -13,9 +14,9 @@ public class ImportSectionReader extends BaseSectionReader<Import> {
 
     @Override
     protected Import read() {
-        var module = file.readString();
-        var name = file.readString();
-        var sectionEntryType = file.readExternalKind();
+        String module = file.readString();
+        String name = file.readString();
+        ImportSectionEntryType sectionEntryType = file.readExternalKind();
         return new Import(module, name, sectionEntryType);
     }
 

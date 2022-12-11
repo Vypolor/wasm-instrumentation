@@ -16,16 +16,18 @@ import java.util.Map;
 
 public class Main {
 
+    //For test
+    private static final String TEST_FILE_PATH = "D:\\wasm-tutor\\hello-world\\a.out.wasm";
+
     public static void main(String[] args) throws IOException {
         Map<InputParametersPattern, String> parameters = ParametersParser.parseInputParameters(args);
-        Path wasmFile = Paths.get("D:\\wasm-tutor\\hello-world\\a.out.wasm");
+        Path wasmFile = Paths.get(TEST_FILE_PATH);
         FileChannel fileChannel = FileChannel.open(wasmFile, StandardOpenOption.READ);
         MappedByteBuffer buffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, fileChannel.size());
         ModuleBuildingHandler handler = new ModuleBuildingHandler();
         new Parser().parse(buffer, handler);
         Module wasmModule = handler.build();
-        Instance instance = wasmModule.instantiate();
-        WasmValue result = instance.call("do_the_magic", 20, 2);
-        System.out.println(result.value());
     }
+
+
 }
