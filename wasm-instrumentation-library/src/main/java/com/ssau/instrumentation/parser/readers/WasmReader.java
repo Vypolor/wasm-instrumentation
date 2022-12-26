@@ -42,9 +42,13 @@ public class WasmReader extends BufferReader {
         var initial = this.readUnsignedLeb128();
         if (bounded) {
             var maximum = this.readUnsignedLeb128();
-            return new Limits(initial, maximum);
+            Limits limits = new Limits(initial, maximum);
+            limits.setBounded(bounded);
+            return limits;
         } else {
-            return new Limits(initial);
+            Limits limits = new Limits(initial);
+            limits.setBounded(bounded);
+            return limits;
         }
     }
 

@@ -39,4 +39,8 @@ public enum Type {
 
         throw new IllegalArgumentException(String.format("Could not find Type with IDX: %08X", typeIdx));
     }
+
+    public byte getIdx() {
+        return idx;
+    }
 }

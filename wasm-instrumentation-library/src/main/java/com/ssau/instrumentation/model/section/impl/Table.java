@@ -20,4 +20,12 @@ public class Table extends ImportSectionEntryType {
                 ", limits=" + limits +
                 '}';
     }
+
+    public Type getType() {
+        return type;
+    }
+
+    public Limits getLimits() {
+        return limits;
+    }
 }

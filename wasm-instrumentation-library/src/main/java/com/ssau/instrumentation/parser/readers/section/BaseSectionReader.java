@@ -33,7 +33,7 @@ public abstract class BaseSectionReader<T> implements Iterable<T> {
     }
 
     private T readInternal(){
-        T one = read();
+       T one = read();
         current++;
         return one;
     }
@@ -55,7 +55,7 @@ public abstract class BaseSectionReader<T> implements Iterable<T> {
     public List<T> toList(){
         var list = new ArrayList<T>(this.count);
         for (var i = 0; i < this.count; i++){
-            list.add(readInternal());
+          list.add(readInternal());
         }
         return list;
     }

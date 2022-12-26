@@ -31,6 +31,10 @@ public class Global {
         return this.type;
     }
 
+    public byte mutability() {
+        return mutability;
+    }
+
     public byte[] expression() {
         return this.expressionBuffer;
     }

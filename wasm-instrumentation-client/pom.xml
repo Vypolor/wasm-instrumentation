@@ -22,5 +22,6 @@
             <artifactId>wasm-instrumentation-library</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 </project>

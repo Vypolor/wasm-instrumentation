@@ -2,6 +2,7 @@ package com.ssau.instrumentation.handler;
 
 import com.ssau.instrumentation.model.Global;
 import com.ssau.instrumentation.model.TypeDefinition;
+import com.ssau.instrumentation.model.section.impl.Table;
 import com.ssau.instrumentation.model.segments.*;
 import com.ssau.instrumentation.parser.Handler;
 import com.ssau.instrumentation.parser.readers.BufferReader;
@@ -23,6 +24,7 @@ public class ModuleBuildingHandler implements Handler {
     private List<ExportSegment> exportSegments = emptyList();
     private List<Integer> functionTypes = emptyList();
     private List<FunctionSegment> functionSegments = emptyList();
+    private List<Table> tables = emptyList();
 
     @Override
     public void onVersion(byte[] version) {
@@ -78,7 +80,7 @@ public class ModuleBuildingHandler implements Handler {
 
     @Override
     public void onTableSection(TableSectionReader reader) {
-
+        tables = reader.toList();
     }
 
     @Override
@@ -92,6 +94,7 @@ public class ModuleBuildingHandler implements Handler {
     }
 
     public Module build() {
-        return new Module(memories, globals, datas, elements, types, exportSegments, functionTypes, functionSegments);
+        return new Module(memories, globals, datas, elements, types, exportSegments
+                , functionTypes, functionSegments, tables);
     }
 }
