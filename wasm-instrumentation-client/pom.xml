@@ -22,6 +22,17 @@
             <artifactId>wasm-instrumentation-library</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmc</groupId>
+            <artifactId>flightrecorder</artifactId>
+            <version>8.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmc</groupId>
+            <artifactId>flightrecorder.writer</artifactId>
+            <version>8.2.1</version>
+        </dependency>
+
 
     </dependencies>
 </project>

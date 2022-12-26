@@ -16,6 +16,7 @@ public class SectionWritersFactory {
             case Memory -> sectionWriter = new MemorySectionWriter(sectionLength, module.getMemories());
             case Global -> sectionWriter = new GlobalSectionWriter(sectionLength, module.getGlobals());
             case Export -> sectionWriter = new ExportSectionWriter(sectionLength, module.getExportSegments());
+            case Code -> sectionWriter = new CodeSectionWriter(sectionLength, module.getFunctionSegments());
             default -> System.out.println("Can't find writer for specified section");
         }
         return sectionWriter;

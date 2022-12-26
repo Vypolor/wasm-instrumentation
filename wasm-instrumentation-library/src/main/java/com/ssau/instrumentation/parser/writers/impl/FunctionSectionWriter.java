@@ -19,8 +19,8 @@ public class FunctionSectionWriter implements SectionWriter {
     @Override
     public void write(List<Byte> bytes) {
         bytes.add(SECTION_IDX);
-        bytes.add((byte) sectionLength);
-        bytes.add((byte) functionTypes.size());
+        writeUnsignedLeb128(bytes, sectionLength);
+        writeUnsignedLeb128(bytes, functionTypes.size());
         for (Integer functionType : functionTypes) {
             int funcType = functionType;
             bytes.add((byte) funcType);

@@ -29,7 +29,7 @@ public class CodeSectionReader extends BaseSectionReader<FunctionSegment> {
         int codeLength = functionLength - (functionEnd - functionStart);
         byte[] opcodes = file.readBytes(codeLength);
 
-        return new FunctionSegment(locals, opcodes);
+        return new FunctionSegment(locals, opcodes, functionLength);
     }
 
     @Override

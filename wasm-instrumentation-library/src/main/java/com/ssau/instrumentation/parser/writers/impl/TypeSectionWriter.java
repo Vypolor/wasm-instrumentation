@@ -22,20 +22,19 @@ public class TypeSectionWriter implements SectionWriter {
     @Override
     public void write(List<Byte> bytes) {
         bytes.add(SECTION_IDX);
-        bytes.add(((byte) sectionLength));
-        bytes.add((byte) types.size());
+        writeUnsignedLeb128(bytes, sectionLength);
+        writeUnsignedLeb128(bytes, types.size());
         for (TypeDefinition typeDefinition : types) {
             bytes.add((byte) 0x60);
             FunctionType functionType = (FunctionType) typeDefinition;
-            bytes.add((byte) functionType.parameters().length);
+            writeUnsignedLeb128(bytes, functionType.parameters().length);
             for (Type type : functionType.parameters()) {
                 bytes.add(type.getIdx());
             }
-            bytes.add((byte) functionType.returns().length);
+            writeUnsignedLeb128(bytes, functionType.returns().length);
             for (Type type : functionType.returns()) {
                 bytes.add(type.getIdx());
             }
-            System.out.println();
         }
     }
 }

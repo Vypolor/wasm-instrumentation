@@ -11,6 +11,14 @@ public class Local {
         this.type = type;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
         return count + ":" + type;

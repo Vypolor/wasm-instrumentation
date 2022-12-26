@@ -20,13 +20,13 @@ public class TableSectionWriter implements SectionWriter {
     @Override
     public void write(List<Byte> bytes) {
         bytes.add(SECTION_IDX);
-        bytes.add((byte) sectionLength);
-        bytes.add((byte) tableList.size());
+        writeUnsignedLeb128(bytes, sectionLength);
+        writeUnsignedLeb128(bytes, tableList.size());
         for (Table table : tableList) {
             bytes.add(table.getType().getIdx());
             bytes.add(convertBooleanToByte(table.getLimits().isBounded()));
-            bytes.add((byte) table.getLimits().getInitial());
-            bytes.add((byte) table.getLimits().getMaximum());
+            writeUnsignedLeb128(bytes, table.getLimits().getInitial());
+            writeUnsignedLeb128(bytes, table.getLimits().getMaximum());
         }
     }
 }

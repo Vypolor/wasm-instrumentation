@@ -20,8 +20,8 @@ public class GlobalSectionWriter implements SectionWriter {
     @Override
     public void write(List<Byte> bytes) {
         bytes.add(SECTION_IDX);
-        bytes.add((byte) sectionLength);
-        bytes.add((byte) globals.size());
+        writeUnsignedLeb128(bytes, sectionLength);
+        writeUnsignedLeb128(bytes, globals.size());
         for (Global global : globals) {
             bytes.add(global.type().getIdx());
             bytes.add(global.mutability());

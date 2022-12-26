@@ -14,10 +14,15 @@ public interface SectionWriter {
         }
     }
 
-    default int convert128values (int number) {
-        if (number % 128 == 0) {
-            return number / 128;
+    default void writeUnsignedLeb128(List<Byte> out, int value) {
+        int remaining = value >>> 7;
+
+        while (remaining != 0) {
+            out.add((byte) ((value & 0x7f) | 0x80));
+            value = remaining;
+            remaining >>>= 7;
         }
-        return 0;
+
+        out.add((byte) (value & 0x7f));
     }
 }
